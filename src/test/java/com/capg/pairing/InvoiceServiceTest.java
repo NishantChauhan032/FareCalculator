@@ -1,33 +1,38 @@
 package com.capg.pairing;
 
 import org.junit.Assert;
+import org.junit.Before;
 import org.junit.Test;
 
 public class InvoiceServiceTest {
+	InvoiceGenerator invoiceGenerator = null;
+	
+	@Before
+	public void setUp() throws Exception{
+		invoiceGenerator = new InvoiceGenerator();
+	}
+	
 	@Test
 	public void givenDistanceAndTime_whenCalculated_shouldReturnTotalFare() {
-		InvoiceGenerator fareCalculator = new InvoiceGenerator();
 		double distance = 4.0;
 		int time = 10;
-		double fare = fareCalculator.calculateFare(distance, time);
+		double fare = invoiceGenerator.calculateFare(distance, time);
 		Assert.assertEquals(50, fare, 0.0);
 	}
 
 	@Test
 	public void givenDistanceAndTime_whenFareLessThanMinFare_shouldReturnMinimumFare() {
-		InvoiceGenerator fareCalculator = new InvoiceGenerator();
 		double distance = 0.1;
 		int time = 1;
-		double fare = fareCalculator.calculateFare(distance, time);
+		double fare = invoiceGenerator.calculateFare(distance, time);
 		Assert.assertEquals(5, fare, 0.0);
 	}
 	
 	@Test
 	public void givenMultipleRides_ShouldReturnTotalFare() {
-		InvoiceGenerator fareCalculator = new InvoiceGenerator();
 		Ride[] rides = {new Ride(4.0, 10),
 						new Ride(0.1, 1)};
-		double fare = fareCalculator.calculateFare(rides);
+		double fare = invoiceGenerator.calculateFare(rides);
 		Assert.assertEquals(55, fare, 0.0);
 	}
 }

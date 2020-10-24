@@ -1,8 +1,8 @@
 package com.capg.pairing;
 
 public class Ride {
-	private double distance;
-	private int time;
+	public double distance;
+	public final int time;
 
 	public Ride(double distance, int time) {
 		this.distance = distance;
