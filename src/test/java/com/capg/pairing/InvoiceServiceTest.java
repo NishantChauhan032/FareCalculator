@@ -1,7 +1,6 @@
 package com.capg.pairing;
 
-import static org.junit.Assert.assertEquals;
-
+import org.junit.Assert;
 import org.junit.Test;
 
 public class InvoiceServiceTest {
@@ -11,6 +10,6 @@ public class InvoiceServiceTest {
 		double distance = 4.0;
 		int time = 10;
 		double fare = fareCalculator.calculateFare(distance, time);
-		assertEquals(50, fare, 0);
+		Assert.assertEquals(50, fare, 0.0);
 	}
 }
