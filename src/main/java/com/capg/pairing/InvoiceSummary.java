@@ -11,7 +11,7 @@ public class InvoiceSummary {
 		this.totalFare = totalFare;
 		this.averageFare = averageFare;
 		
-	}
+	} 
 
 	@Override
 	public boolean equals(Object obj) {

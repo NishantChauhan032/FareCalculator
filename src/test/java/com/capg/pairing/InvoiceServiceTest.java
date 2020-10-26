@@ -33,7 +33,7 @@ public class InvoiceServiceTest {
 		Ride[] rides = { 
 						new Ride(4.0, 10), 
 						new Ride(0.1, 1) 
-					};
+					}; 
 		InvoiceSummary summary = invoiceGenerator.calculateFare(rides);
 		InvoiceSummary expectedInvoiceSummary = new InvoiceSummary(2, 55);
 		Assert.assertEquals(expectedInvoiceSummary, summary);
