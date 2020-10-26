@@ -12,11 +12,11 @@ public class InvoiceGenerator {
 
 	public InvoiceSummary calculateFare(Ride[] rides) {
 		double totalFare = 0;
-		
-		for(Ride ride : rides) {
-			totalFare  += this.calculateFare(ride.distance,ride.time);
+
+		for (Ride ride : rides) {
+			totalFare += this.calculateFare(ride.distance, ride.time);
 		}
-		return null;
+		return new InvoiceSummary(rides.length,totalFare);
 	}
 
 	public void addRides(String userId, Ride[] rides) {
