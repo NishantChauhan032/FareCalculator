@@ -18,4 +18,12 @@ public class InvoiceGenerator {
 		}
 		return null;
 	}
+
+	public void addRides(String userId, Ride[] rides) {
+		
+	}
+
+	public InvoiceSummary getInvoiceSummary(Ride[] rides) {
+		return null;
+	}
 }
