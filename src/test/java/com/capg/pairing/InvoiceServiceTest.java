@@ -5,35 +5,30 @@ import org.junit.Before;
 import org.junit.Test;
 
 public class InvoiceServiceTest {
+	Ride[] rides = null;
 	InvoiceGenerator invoiceGenerator = null;
+	InvoiceSummary invoiceSummary = null;
+	RideRepository rideRepository = null;
+	InvoiceSummary expectedInvoiceSummary = null;
 
 	@Before
 	public void setUp() throws Exception {
 		invoiceGenerator = new InvoiceGenerator();
-	}
-
-	@Test
-	public void givenDistanceAndTime_whenCalculated_shouldReturnTotalFare() {
-		double distance = 4.0;
-		int time = 10;
-		double fare = invoiceGenerator.calculateFare(distance, time);
-		Assert.assertEquals(50, fare, 0.0);
-	}
-
-	@Test
-	public void givenDistanceAndTime_whenFareLessThanMinFare_shouldReturnMinimumFare() {
-		double distance = 0.1;
-		int time = 1;
-		double fare = invoiceGenerator.calculateFare(distance, time);
-		Assert.assertEquals(5, fare, 0.0);
+		rideRepository = new RideRepository();
+		invoiceGenerator.setRideRepository(rideRepository);
+		rides = new Ride[] {
+				new Ride(CabRide.NORMAL, 4.0, 10), 
+				new Ride(CabRide.PREMIUM, 0.1, 1)
+		};
+		expectedInvoiceSummary = new InvoiceSummary(2, 70);
 	}
 
 	@Test
 	public void givenMultipleRides_ShouldReturnInvoiceSummary() {
-		Ride[] rides = { 
-						new Ride(4.0, 10), 
-						new Ride(0.1, 1) 
-					};
+		rides = new Ride[] { 
+				new Ride(CabRide.NORMAL,4.0, 10), 
+				new Ride(CabRide.NORMAL,0.1, 1) 
+		};
 		InvoiceSummary summary = invoiceGenerator.calculateFare(rides);
 		InvoiceSummary expectedInvoiceSummary = new InvoiceSummary(2, 55);
 		Assert.assertEquals(expectedInvoiceSummary, summary);
@@ -42,13 +37,8 @@ public class InvoiceServiceTest {
 	@Test
 	public void givenUserIDAndRides_shouldReturnInvoiceSummary() {
 		String userId = "pair@abc.com";
-		Ride[] rides = { 
-						new Ride(4.0, 10), 
-						new Ride(0.1, 1) 
-					};
 		invoiceGenerator.addRides(userId, rides);
 		InvoiceSummary summary = invoiceGenerator.getInvoiceSummary(userId);
-		InvoiceSummary expectedInvoiceSummary = new InvoiceSummary(2, 55);
 		Assert.assertEquals(expectedInvoiceSummary, summary);
 	}
 }
