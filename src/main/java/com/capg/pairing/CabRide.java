@@ -14,6 +14,7 @@ public enum CabRide {
 	}
 
 	public double calculateFare(Ride ride) {
-		return 0;
+		double rideCost = ride.distance * DISTANCE_RATE + ride.time * TIME_RATE;
+		return Math.max(rideCost, MINIMUM_FARE);
 	}
 }

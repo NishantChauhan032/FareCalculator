@@ -9,9 +9,9 @@ public class InvoiceSummary {
 	public InvoiceSummary(int numOfRides, double totalFare) {
 		this.numOfRides = numOfRides;
 		this.totalFare = totalFare;
-		this.averageFare = totalFare/numOfRides;
-		
-	} 
+		this.averageFare = totalFare / numOfRides;
+
+	}
 
 	@Override
 	public boolean equals(Object obj) {
